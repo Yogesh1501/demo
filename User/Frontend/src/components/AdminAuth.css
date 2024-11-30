@@ -1,0 +1,96 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8; /* Light background for contrast */
+  margin: 0;
+  padding: 0;
+}
+
+.auth-container {
+  max-width: 400px; /* Set a max width for the login box */
+  margin: 50px auto; /* Center the login box vertically and horizontally */
+  padding: 20px;
+  background-color: #ffffff; /* White background for the form */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+.head2 {
+  text-align: center; /* Center the heading */
+  color: #333; /* Darker color for text */
+}
+
+.form-group-1 {
+  margin: 0 15px;
+  padding: 10px 20px; /* Space between form elements */
+}
+
+.AdLlabel {
+  display: block; /* Block display for labels */
+  margin-bottom: 5px; /* Space below labels */
+  color: #666; /* Gray color for labels */
+}
+
+.input[type="text"],
+.input[type="email"],
+.input[type="tel"],
+.input[type="password"] {
+  width: 94%; /* Full width inputs */
+  padding: 10px; /* Padding inside input fields */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 4px; /* Rounded corners for input */
+  font-size: 16px; /* Font size for inputs */
+  background-color: #f9f9f9; /* Light background for inputs */
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; /* Smooth transition for border color, box shadow, and background */
+}
+
+/* Focus state styles */
+.input:focus {
+  border-color: #007bff; /* Blue border on focus */
+  outline: none; /* Remove outline */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle blue shadow */
+  background-color: #ffffff; /* White background on focus */
+}
+
+/* Placeholder styles */
+.input::placeholder {
+  color: #999; /* Gray color for placeholders */
+  opacity: 1; /* Ensure placeholder is fully visible */
+}
+
+/* Styles for disabled state */
+.input:disabled {
+  background-color: #e9ecef; /* Light gray for disabled fields */
+  cursor: not-allowed; /* Indicate not allowed cursor */
+}
+
+.auth-btn {
+  margin: 8%;
+  width: 84%;/* Full width for button */
+  padding: 10px;
+  background-color: #28a745; /* Green background for the button */
+  color: #ffffff; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth transition for background */
+}
+
+.auth-btn:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+p {
+  text-align: center; /* Centered text */
+  margin-top: 15px; /* Space above the paragraph */
+}
+
+a {
+  color: #007bff; /* Link color */
+  text-decoration: none; /* Remove underline */
+  transition: text-decoration 0.3s; /* Smooth transition for underline */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover */
+}

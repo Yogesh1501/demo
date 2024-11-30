@@ -1,0 +1,73 @@
+  .ad-notice-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .ad-notice-contact-bx{
+    max-width: 850px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
+    padding: 40px;
+    border-radius: 10px;
+  }
+  
+  .ad-notice-r8 {
+    padding: 25px 40px;
+  }
+  
+  .ad-notice-h2 {
+    font-size: 35px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .ad-notice-field {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    margin-bottom: 22px;
+    font-size: 1.1rem;
+    border: 2px solid transparent;
+    outline: none;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 5px;
+  }
+  
+  .ad-notice-field:hover {
+    background-color: #f5f5f7;
+  }
+  
+  textarea.ad-notice-field {
+    min-height: 150px;
+  }
+  
+  .ad-notice-btn {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #19B3D3;
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+  }
+  
+  .ad-notice-btn:hover {
+    background-color: #0B87A6;
+  }
+  
+  .ad-notice-field:focus {
+    border: 2px solid rgba(30, 85, 250, 0.47);
+    background-color: #fff;
+  }
+  

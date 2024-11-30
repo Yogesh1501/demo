@@ -1,0 +1,100 @@
+/* General form styling */
+.AddMaintenance-form {
+  max-width: 450px;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.AddMaintenance-form label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.AddMaintenance-form input[type="text"],
+.AddMaintenance-form input[type="number"],
+.AddMaintenance-form input[type="file"] {
+  width: 94%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.AddMaintenance-form input[type="text"]:focus,
+.AddMaintenance-form input[type="number"]:focus,
+.AddMaintenance-form input[type="file"]:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+.AddMaintenance-form button[type="submit"] {
+  width: 99%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.AddMaintenance-form button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+.AddMaintenance-form button[type="submit"]:active {
+  transform: scale(0.98);
+}
+/* Centered View Maintenance Button with Auto Width */
+.AddMaintenance-viewMaintenanceBtn {
+  display: inline-block; /* Allows width to fit content */
+  Width: 30%;
+  padding: 12px 24px; /* Adds padding around the text */
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  margin: 20px auto; /* Centers the button horizontally */
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.AddMaintenance-viewMaintenanceBtn:hover {
+  background-color: #0056b3;
+}
+
+.AddMaintenance-viewMaintenanceBtn:active {
+  transform: scale(0.98);
+}
+
+/* Additional styling */
+.AddMaintenance-form div {
+  margin-bottom: 20px;
+}
+
+.AddMaintenance-form label {
+  font-size: 14px;
+  color: #555;
+}
+
+.AddMaintenance-form-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 20px;
+}

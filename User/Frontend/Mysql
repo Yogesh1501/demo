@@ -1,0 +1,65 @@
+-- Database: resisterdatabase
+
+CREATE TABLE admins (
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,  -- Added UNIQUE constraint for email
+    mobilenumber VARCHAR(15) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    INDEX (email)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+CREATE TABLE register (  -- Renamed table from 'resister' to 'register'
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,  -- Changed INT(100) to INT(11)
+    username VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,  -- Added UNIQUE constraint for email
+    password VARCHAR(100) NOT NULL,
+    first_login TINYINT(1) DEFAULT 1
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+CREATE TABLE events (
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    ename VARCHAR(255) NOT NULL,
+    etype VARCHAR(255) NOT NULL,
+    edate DATE NOT NULL,
+    emsg TEXT NOT NULL,
+    eimage VARCHAR(255) NOT NULL,  -- Added eimage column for event images
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+CREATE TABLE complaints (
+    id INT(11) PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    flatNumber VARCHAR(10) NOT NULL,
+    dateOfRegistration DATE DEFAULT NULL,
+    complaintType VARCHAR(50) DEFAULT NULL,
+    subject VARCHAR(100) DEFAULT NULL,
+    description TEXT DEFAULT NULL,
+    status VARCHAR(20) DEFAULT 'Pending',
+    INDEX (flatNumber),  -- Added index for flatNumber
+    INDEX (status)        -- Added index for status
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+CREATE TABLE flat (
+    flatNumber VARCHAR(10) PRIMARY KEY,
+    blockNumber VARCHAR(10) NOT NULL,
+    ownerName VARCHAR(100) NOT NULL,
+    ownerContact VARCHAR(15) DEFAULT NULL,
+    residents INT(11) DEFAULT NULL,
+    flatType VARCHAR(50) DEFAULT NULL,
+    status VARCHAR(20) DEFAULT 'Available',
+    rentType VARCHAR(50) DEFAULT NULL,
+    startDate DATE DEFAULT NULL,
+    INDEX (blockNumber)  -- Added index for blockNumber
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+
+CREATE TABLE maintenance_records (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(100) NOT NULL,
+    flat_number VARCHAR(20) NOT NULL,
+    amount_paid DECIMAL(10, 2) NOT NULL,
+    payment_snapshot VARCHAR(255),  -- to store the file path of the snapshot
+    payment_month DATE,             -- stores the month of the payment
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
