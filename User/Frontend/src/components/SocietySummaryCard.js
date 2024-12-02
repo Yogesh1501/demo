@@ -24,9 +24,9 @@ const SocietySummaryCard = () => {
 
   return (
     <div className="summaryCard">
-      {/* <h3>Society Summary</h3>
+      <h3>Society Summary</h3>
       <p>Total Flats: {summary.total_flats}</p>
-      <p>Maintenance per Flat: ${summary.maintenance_per_flat}</p> */}
+      <p>Maintenance per Flat: ${summary.maintenance_per_flat}</p>
     </div>
   );
 };

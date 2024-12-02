@@ -1,30 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./AdminUpdateCard.css";
-//import AddMaintenance from "./AddMaintenance";
-import MaintenanceForm from "./MaintenanceForm";
+import AddMaintenance from "./AddMaintenance";
 
 const AdminUpdateCard = ({ societyData }) => {
-  // State hooks for managing society data
   const [totalWings, setTotalWings] = useState(societyData?.wings || 0);
   const [flatsPerFloor, setFlatsPerFloor] = useState(societyData?.flatsPerFloor || 0);
   const [floorsPerWing, setFloorsPerWing] = useState(societyData?.floorsPerWing || 0);
   const [maintenancePerFlat, setMaintenancePerFlat] = useState(societyData?.maintenancePerFlat || 0);
-  
-  // State hooks for flats data and maintenance modal
   const [flatsData, setFlatsData] = useState([]);
   const [selectedWing, setSelectedWing] = useState(null);
   const [selectedFlat, setSelectedFlat] = useState(null);
   const [month, setMonth] = useState("");
   const [showAddMaintenanceModal, setShowAddMaintenanceModal] = useState(false);
 
-  // State hook for summary data
   const [summary, setSummary] = useState({
     totalMaintenance: 0,
     totalPaid: 0,
     totalPending: 0,
   });
 
-  // Fetch society summary on component load
   useEffect(() => {
     const fetchSummary = async () => {
       const response = await fetch("http://127.0.0.1:5000/summary");
@@ -36,7 +30,6 @@ const AdminUpdateCard = ({ societyData }) => {
     fetchSummary();
   }, []);
 
-  // Update state values when societyData prop changes
   useEffect(() => {
     if (societyData) {
       setTotalWings(societyData.wings);
@@ -46,7 +39,6 @@ const AdminUpdateCard = ({ societyData }) => {
     }
   }, [societyData]);
 
-  // Calculate the total maintenance, paid, and pending amounts
   const calculateSummary = () => {
     let totalMaintenance = 0;
     let totalPaid = 0;
@@ -67,7 +59,6 @@ const AdminUpdateCard = ({ societyData }) => {
     calculateSummary();
   }, [flatsData]);
 
-  // Handle form submission for updating society data
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -78,8 +69,6 @@ const AdminUpdateCard = ({ societyData }) => {
     }));
 
     setFlatsData(wingData);
-
-    // Update society details in the backend
     await updateSociety();
   };
 
@@ -99,7 +88,6 @@ const AdminUpdateCard = ({ societyData }) => {
     return flats;
   };
 
-  // Update society data in the backend
   const updateSociety = async () => {
     const response = await fetch("http://127.0.0.1:5000/update_society", {
       method: "POST",
@@ -119,7 +107,6 @@ const AdminUpdateCard = ({ societyData }) => {
     }
   };
 
-  // Toggle the maintenance history visibility
   const toggleHistory = (wingIndex, flatIndex) => {
     setFlatsData((prevData) =>
       prevData.map((wing, i) =>
@@ -142,7 +129,6 @@ const AdminUpdateCard = ({ societyData }) => {
     );
   };
 
-  // Add maintenance to a flat
   const addMaintenance = async (flatId, date, amount, month) => {
     const response = await fetch("http://127.0.0.1:5000/maintenance", {
       method: "POST",
@@ -174,7 +160,7 @@ const AdminUpdateCard = ({ societyData }) => {
           <p>₹{summary.totalPending}</p>
         </div>
       </div>
-
+  
       {/* Update Society Form */}
       <form onSubmit={handleSubmit} className="updateCard-form">
         <h3>Update Society Summary</h3>
@@ -218,7 +204,7 @@ const AdminUpdateCard = ({ societyData }) => {
         </select>
         <button type="submit">Update Summary</button>
       </form>
-
+  
       {/* Wings List */}
       <div className="wings-container">
         {flatsData.map((wing, wingIndex) => (
@@ -231,7 +217,7 @@ const AdminUpdateCard = ({ societyData }) => {
           </div>
         ))}
       </div>
-
+  
       {/* Flats List for Selected Wing */}
       {selectedWing !== null && (
         <div className="flats-container">
@@ -269,17 +255,17 @@ const AdminUpdateCard = ({ societyData }) => {
           ))}
         </div>
       )}
-
-      {/* Add Maintenance Modal */}
-      {showAddMaintenanceModal && (
-        <MaintenanceForm
-          flat={flatsData[selectedFlat.wingIndex].flats[selectedFlat.flatIndex]}
-          onClose={() => setShowAddMaintenanceModal(false)}
-          onAddMaintenance={addMaintenance}
+  
+      {/* Add Maintenance Component */}
+      {selectedFlat && (
+        <AddMaintenance
+          flatNumber={flatsData[selectedFlat.wingIndex].flats[selectedFlat.flatIndex].flatNumber}
+          onClose={() => setSelectedFlat(null)} // Close AddMaintenance when done
         />
       )}
     </div>
   );
+  
 };
 
-export default AdminUpdateCard;
+export default AdminUpdateCard;          

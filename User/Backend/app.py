@@ -609,41 +609,41 @@ def get_notices_summary():
 
 
 
-# @app.route('/add_maintenance', methods=['POST'])
-# def add_maintenance():
-# #     user_name = request.form['user_name']
-# #     flat_number = request.form['flat_number']
-# #     amount_paid = request.form['amount_paid']
-# #     payment_month = request.form['payment_month']  # Expected format: YYYY-MM
-# #     snapshot = request.files['snapshot']
+@app.route('/add_maintenance', methods=['POST'])
+def add_maintenance():
+    user_name = request.form['user_name']
+    flat_number = request.form['flat_number']
+    amount_paid = request.form['amount_paid']
+    payment_month = request.form['payment_month']  # Expected format: YYYY-MM
+    snapshot = request.files['snapshot']
 
-# #     # Parse payment_month to a full date (e.g., "2024-08" -> "2024-08-01")
-# #     try:
-# #         payment_month_parsed = datetime.strptime(payment_month, "%Y-%m").date()
-# #     except ValueError:
-# #         return jsonify({'error': 'Invalid payment month format'}), 400
+    # Parse payment_month to a full date (e.g., "2024-08" -> "2024-08-01")
+    try:
+        payment_month_parsed = datetime.strptime(payment_month, "%Y-%m").date()
+    except ValueError:
+        return jsonify({'error': 'Invalid payment month format'}), 400
 
-# #     # Save the snapshot if it exists
-# #     filename = None
-# #     if snapshot and allowed_file(snapshot.filename):
-# #         filename = snapshot.filename
-# #         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-# #         snapshot.save(file_path)
+    # Save the snapshot if it exists
+    filename = None
+    if snapshot and allowed_file(snapshot.filename):
+        filename = snapshot.filename
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        snapshot.save(file_path)
 
-# #     # Save to MySQL database
-# #     conn = mysql.connection
-# #     cursor = conn.cursor()
-# #     cursor.execute(
-# #         '''
-# #         INSERT INTO maintenance_records (user_name, flat_number, amount_paid, payment_month, payment_snapshot) 
-# #         VALUES (%s, %s, %s, %s, %s)
-# #         ''',
-# #         (user_name, flat_number, amount_paid, payment_month_parsed, filename)
-# #     )
-# #     conn.commit()
-# #     cursor.close()
+    # Save to MySQL database
+    conn = mysql.connection
+    cursor = conn.cursor()
+    cursor.execute(
+        '''
+        INSERT INTO maintenance_records (user_name, flat_number, amount_paid, payment_month, payment_snapshot) 
+        VALUES (%s, %s, %s, %s, %s)
+        ''',
+        (user_name, flat_number, amount_paid, payment_month_parsed, filename)
+    )
+    conn.commit()
+    cursor.close()
 
-# #     return jsonify({'message': 'Maintenance record added successfully'})
+    return jsonify({'message': 'Maintenance record added successfully'})
 
 # Get maintenance records for admin
 @app.route('/get_maintenance_records', methods=['GET'])
@@ -858,93 +858,6 @@ def maintenance_summary():
         import traceback
         print("Error:", traceback.format_exc())
         return jsonify({"error": str(e)}), 500
-    
-
-# Endpoint to fetch society maintenance summary
-@app.route('/summary', methods=['GET'])
-def get_summary():
-    try:
-        cursor = mysql.connection.cursor()
-        cursor.execute("""
-            SELECT 
-                SUM(f.paid_maintenance + f.pending_maintenance) AS total_maintenance,
-                SUM(f.paid_maintenance) AS total_paid,
-                SUM(f.pending_maintenance) AS total_pending
-            FROM flats f
-            JOIN wings w ON f.wing_id = w.id
-            JOIN society s ON w.society_id = s.id
-        """)
-        summary = cursor.fetchone()
-
-        return jsonify({
-            'totalMaintenance': summary[0] if summary[0] else 0,
-            'totalPaid': summary[1] if summary[1] else 0,
-            'totalPending': summary[2] if summary[2] else 0
-        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-
-# Endpoint to update society information
-@app.route('/update_society', methods=['POST'])
-def update_society():
-    try:
-        data = request.json
-        cursor = mysql.connection.cursor()
-
-        # Insert into society table
-        cursor.execute("""
-            INSERT INTO society (total_wings, flats_per_floor, floors_per_wing, maintenance_per_flat)
-            VALUES (%s, %s, %s, %s)
-        """, (data['totalWings'], data['flatsPerFloor'], data['floorsPerWing'], data['maintenancePerFlat']))
-        mysql.connection.commit()
-
-        society_id = cursor.lastrowid
-
-        # Generate wing names and insert into wings table
-        wing_names = [f"Wing {chr(65 + i)}" for i in range(data['totalWings'])]
-        for wing_name in wing_names:
-            cursor.execute("""
-                INSERT INTO wings (name, society_id)
-                VALUES (%s, %s)
-            """, (wing_name, society_id))
-        mysql.connection.commit()
-
-        return jsonify({"message": "Society updated successfully"}), 201
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
-
-# Endpoint to add maintenance history
-@app.route('/maintenance', methods=['POST'])
-def add_maintenance():
-    try:
-        data = request.json
-        cursor = mysql.connection.cursor()
-
-        # Insert into maintenance history table
-        cursor.execute("""
-            INSERT INTO maintenance_history (flat_id, date, amount, month)
-            VALUES (%s, %s, %s, %s)
-        """, (data['flatId'], data['date'], data['amount'], data['month']))
-        mysql.connection.commit()
-
-        # Update flat's maintenance status
-        cursor.execute("""
-            UPDATE flats
-            SET paid_maintenance = paid_maintenance + %s, 
-                pending_maintenance = pending_maintenance - %s
-            WHERE id = %s
-        """, (data['amount'], data['amount'], data['flatId']))
-        mysql.connection.commit()
-
-        return jsonify({"message": "Maintenance added successfully"}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-    finally:
-        cursor.close()
 
 
 if __name__ == '__main__':

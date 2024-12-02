@@ -1,273 +1,209 @@
-/* General Styling for the Form */
-.updateCard-form {
-  margin: 20px auto;
+/* General Styling */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Summary Container */
+.summary-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.summary-card {
+  background-color: #ffffff;
   padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex: 1;
+  margin: 0 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.summary-card h4 {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.summary-card p {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #28a745;
+}
+
+/* Form Styling */
+.updateCard-form {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
   max-width: 600px;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .updateCard-form h3 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+  margin-bottom: 15px;
+  color: #444;
 }
 
 .updateCard-form label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
-  color: #555;
 }
 
 .updateCard-form input,
 .updateCard-form select {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 16px;
-  color: #333;
+  font-size: 1em;
 }
 
 .updateCard-form button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  color: #fff;
-  background: #007bff;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
   border: none;
   border-radius: 5px;
+  font-size: 1em;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
 .updateCard-form button:hover {
-  background: #0056b3;
+  background-color: #0056b3;
 }
 
-/*Wings Style*/
-
+/* Wings Container */
 .wings-container {
   display: flex;
   flex-wrap: wrap;
+  margin: 20px 0;
   justify-content: center;
-  gap: 16px;
-  margin-top: 20px;
 }
 
 .wing-card {
-  width: 120px;
-  padding: 16px;
-  background-color: #4CAF50;
-  color: #fff;
-  text-align: center;
+  background-color: #ffffff;
+  padding: 15px;
+  margin: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: transform 0.3s;
+  text-align: center;
+  width: 120px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .wing-card:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .wing-card h4 {
-  font-size: 18px;
-  margin: 0;
+  color: #444;
 }
 
-/* Summary Container Styling */
-.summary-container {
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
+/* Flats Container */
+.flats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
   margin: 20px 0;
 }
 
-.summary-card {
-  flex: 1;
-  padding: 20px;
-  background: #f9f9f9;
+.flat-card {
+  background-color: #ffffff;
+  padding: 15px;
   border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
 }
 
-.summary-card h4 {
-  margin-bottom: 10px;
+.flat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.flat-card h5 {
+  margin: 0;
   font-size: 1.2em;
   color: #555;
 }
 
-.summary-card p {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #333;
-}
-
-.summary-card.total-maintenance {
-  border-top: 5px solid #4caf50;
-}
-
-.summary-card.total-paid {
-  border-top: 5px solid #2196f3;
-}
-
-.summary-card.total-pending {
-  border-top: 5px solid #f44336;
-}
-
-/* Wing Card Styling */
-.wing-card {
-  padding: 15px;
-  background: #e8f4ff;
-  border: 1px solid #007bff;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s, background-color 0.3s ease;
-}
-
-.wing-card:hover {
-  transform: scale(1.05);
-  background: #cce7ff;
-}
-
-.wing-card h4 {
-  font-size: 18px;
-  color: #0056b3;
-  margin: 0;
-}
-
-/* Flats Container Styling */
-.flats-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  margin: 20px auto;
-  max-width: 800px;
-  justify-content: center;
-}
-
-.flat-card {
-  padding: 15px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  width: 250px;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.flat-card h5 {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
 .flat-card p {
-  font-size: 14px;
-  color: #555;
   margin: 5px 0;
+  color: #777;
 }
 
 .flat-card button {
-  margin: 10px 5px;
-  padding: 8px 12px;
-  font-size: 14px;
-  color: #fff;
-  background: #28a745;
+  background-color: #28a745;
+  color: white;
   border: none;
-  border-radius: 3px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 0.9em;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
+  margin-top: 10px;
 }
 
 .flat-card button:hover {
-  background: #218838;
+  background-color: #218838;
 }
 
 .flat-card button:nth-child(2) {
-  background: #17a2b8;
+  background-color: #007bff;
 }
 
 .flat-card button:nth-child(2):hover {
-  background: #138496;
+  background-color: #0056b3;
 }
 
-/* Maintenance History Styling */
+.pending-indicator {
+  width: 10px;
+  height: 10px;
+  background-color: #dc3545;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Maintenance History */
 .maintenance-history {
   margin-top: 10px;
   padding: 10px;
-  background: #f8f9fa;
-  border: 1px solid #ddd;
+  background-color: #f8f9fa;
   border-radius: 5px;
-  text-align: left;
 }
 
 .maintenance-history h6 {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.history-item {
-  padding: 5px;
-  border-bottom: 1px solid #ccc;
-}
-
-.history-item:last-child {
-  border-bottom: none;
-}
-
-.history-item p {
-  font-size: 14px;
+  margin: 0 0 10px;
+  font-size: 1em;
   color: #555;
-  margin: 5px 0;
 }
 
-
-.pending-indicator {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 10px;
-  height: 10px;
-  background-color: red;
-  border-radius: 50%;
-  z-index: 1;
+.maintenance-history ul {
+  list-style: none;
+  padding: 0;
 }
 
-.flat-card {
-  position: relative; /* Needed for pending-indicator positioning */
-  
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin: 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.maintenance-history ul li {
+  font-size: 0.9em;
+  color: #777;
+  padding: 5px 0;
 }
-  
-/*
-  .notification-alert {
-    background-color: #ffcccb; /* Light red for alert background */
-   /* border-left: 5px solid red; /* Red border for emphasis */
-   /* padding: 15px;
-    margin: 10px 0;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: #333;
-  }
-  
-  .notification-alert p {
-    margin: 0;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  */
